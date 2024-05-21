@@ -325,12 +325,12 @@ prepare_wgs_cell_line(chrom_names=chrom_names,
     # Segment the phased and haplotyped BAF data
     
     # KT: include SV breakpoints file per tumour region
-    read.filter.gripps(GRIPPS_SV_path = SV_vcf, col_name = "mid", prior_breakpoints_file)
+    read.filter.gripps(GRIPPS_SV_path = SV_vcf[sampleidx], col_name = "mid", prior_breakpoints_fil[sampleidx])
     
     segment.baf.phased(samplename=tumourname[sampleidx],
                        inputfile=paste(tumourname[sampleidx], "_heterozygousMutBAFs_haplotyped.txt", sep=""), 
                        outputfile=paste(tumourname[sampleidx], ".BAFsegmented.txt", sep=""),
-                       prior_breakpoints_file=prior_breakpoints_file,
+                       prior_breakpoints_file=prior_breakpoints_file[sampleidx],
                        gamma=segmentation_gamma,
                        phasegamma=phasing_gamma,
                        kmin=segmentation_kmin,
@@ -486,7 +486,7 @@ prepare_wgs_cell_line(chrom_names=chrom_names,
                     preset_psi=NA,
                     read_depth=30,
                     analysis=analysis,
-                    PURPLE_purity_path=purple_path,
+                    PURPLE_purity_path=purple_path[sampleidx],
                     Tx421_WES_purity_path = WES_solutions)
     
     # KT: need to iterate over callSubclones for each soltion that we find in fit.copy.numberd
@@ -515,7 +515,7 @@ prepare_wgs_cell_line(chrom_names=chrom_names,
                     output.figures.prefix=output.figures.prefix.solution,
                     output.gw.figures.prefix=paste(tumourname[sampleidx],"_BattenbergProfile", sep=""),
                     masking_output_file=paste(tumourname[sampleidx], "_segment_masking_details.txt", sep=""),
-                    prior_breakpoints_file=prior_breakpoints_file,
+                    prior_breakpoints_file=prior_breakpoints_file[sampleidx],
                     chr_names=chrom_names, 
                     gamma=platform_gamma, 
                     segmentation.gamma=NA, 
