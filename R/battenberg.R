@@ -90,7 +90,7 @@ battenberg = function(analysis="paired", tumourname, normalname, tumour_data_fil
   requireNamespace("foreach")
   requireNamespace("doParallel")
   requireNamespace("parallel")
-  
+  print('running modified battenberg...') 
   if (analysis == "cell_line"){
 	  calc_seg_baf_option=1
 	  phasing_gamma=1
